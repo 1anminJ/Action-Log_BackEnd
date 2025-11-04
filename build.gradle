@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.7'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.project'
+version = '0.0.1-SNAPSHOT'
+description = 'Action-Log'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // 1. Spring MVC, REST API, 파일 업로드 등 웹 서버 구동을 위한 핵심 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // 2. OpenAI API 비동기(Non-blocking) 호출을 위한 WebClient 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // 3. DTO 등을 간결하게 만들기 위한 Lombok (선택 사항)
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // 4. 기본 테스트 의존성
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // 5. Swagger(OpenAPI 3) UI 자동 생성을 위한 의존성
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
