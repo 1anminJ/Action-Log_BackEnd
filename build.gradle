@@ -25,23 +25,35 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    // 1. Spring MVC, REST API, 파일 업로드 등 웹 서버 구동을 위한 핵심 의존성
+    // 1. MVP - Web Server & File Upload
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // 2. OpenAI API 비동기(Non-blocking) 호출을 위한 WebClient 의존성
+    // 2. MVP - OpenAI API (WebClient)
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
-    // 3. DTO 등을 간결하게 만들기 위한 Lombok (선택 사항)
+    // 3. Auth - Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // 4. Auth - Spring Data JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // 5. Auth - MySQL Driver
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // 6. Auth - JWT (JSON Web Token)
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // 7. Convenience - Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    // 4. 기본 테스트 의존성
+    // 8. Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 
-    // 5. Swagger(OpenAPI 3) UI 자동 생성을 위한 의존성
+    // 9. MVP - Swagger (API Docs)
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 }
 
