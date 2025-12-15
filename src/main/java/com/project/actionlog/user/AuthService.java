@@ -66,7 +66,9 @@ public class AuthService implements UserDetailsService {
 
         String accessToken = jwtTokenProvider.generateToken(authentication);
 
-        return new AuthDTOs.TokenResponse(accessToken, authentication.getName());
+        User user = (User) authentication.getPrincipal();
+
+        return new AuthDTOs.TokenResponse(accessToken, user.getUserId(), user.getName());
     }
 
     // 3. Spring Security가 email(이제는 userId)로 User를 찾는 데 사용할 메소드

@@ -25,11 +25,13 @@ public class AuthDTOs {
     @Getter
     public static class TokenResponse {
         private String accessToken;
-        private String userId; // [수정] email -> userId
+        private String userId;
+        private String name; // [추가]
 
-        public TokenResponse(String accessToken, String userId) {
+        public TokenResponse(String accessToken, String userId, String name) { // [수정]
             this.accessToken = accessToken;
             this.userId = userId;
+            this.name = name; // [추가]
         }
     }
 }
