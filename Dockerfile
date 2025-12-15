@@ -6,8 +6,8 @@ COPY . .
 RUN chmod +x ./gradlew
 RUN ./gradlew bootJar -x test
 
-# [2단계: 실행 환경] 빌드된 결과물(Jar)만 가져와서 가볍게 실행합니다.
-FROM openjdk:17-jdk-slim
+# [2단계: 실행 환경] 더 안정적인 eclipse-temurin 이미지 사용
+FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 # 빌드 단계에서 생성된 jar 파일을 복사
 COPY --from=builder /app/build/libs/*.jar app.jar
